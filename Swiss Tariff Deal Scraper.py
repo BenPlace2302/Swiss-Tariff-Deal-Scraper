@@ -41,8 +41,8 @@ def get_finance_news():
                 matches.append(title)
     return matches
 
-def get_roche_price():
-    url = "https://finance.yahoo.com/quote/ROG.SW"
+def get_richemont_price():
+    url = "https://finance.yahoo.com/quote/CFR.SW"
     headers = {"User-Agent": "Mozilla/5.0"}
     response = requests.get(url, headers=headers)
     soup = BeautifulSoup(response.text, "html.parser")
@@ -70,8 +70,8 @@ if __name__ == "__main__":
                     print(f"- {n}")
 
             if important_found:
-                price = get_roche_price()
-                print(f"Roche Holding AG current price: {price}")
+                price = get_richemont_price()
+                print(f"Richemont current price: {price}")
         else:
             print("No Swiss headlines found.")
 
