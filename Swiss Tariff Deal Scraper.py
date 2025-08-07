@@ -1,6 +1,7 @@
 import feedparser
 import requests
 from bs4 import BeautifulSoup
+import time
 
 rss_feeds = [
     "https://feeds.bloomberg.com/politics/news.rss",
@@ -56,19 +57,22 @@ def get_roche_price():
         return None
 
 if __name__ == "__main__":
-    news = get_finance_news()
-    if news:
-        print("Swiss headlines:")
-        important_found = False
-        for n in news:
-            if is_important(n):
-                important_found = True
-                print(f"! {n}")
-            else:
-                print(f"- {n}")
+    while True:
+        news = get_finance_news()
+        if news:
+            print("Swiss headlines:")
+            important_found = False
+            for n in news:
+                if is_important(n):
+                    important_found = True
+                    print(f"! {n}")
+                else:
+                    print(f"- {n}")
 
-        if important_found:
-            price = get_roche_price()
-            print(f"Roche Holding AG current price: {price}")
-    else:
-        print("No Swiss headlines found.")
+            if important_found:
+                price = get_roche_price()
+                print(f"Roche Holding AG current price: {price}")
+        else:
+            print("No Swiss headlines found.")
+
+        time.sleep(30)
